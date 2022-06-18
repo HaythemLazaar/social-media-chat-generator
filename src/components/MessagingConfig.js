@@ -1,8 +1,10 @@
 import React from 'react'
 import { useEffect, useState} from 'react'
+import styled from 'styled-components'
 
 function MessagingConfig() {
-    const [messages, setMessages] = useState()
+    const [messages, setMessages] = useState([]);
+    
   return (
     <div>
         <ChatSettings>
@@ -24,7 +26,6 @@ function MessagingConfig() {
         </ChatPerson>
         <ChatPerson>
             <h2>Person 2 Chat :</h2>
-            
             <h3>Name :</h3>
             <input type='text' />
             <h3>Online Status :</h3>
@@ -48,4 +49,10 @@ const ChatPerson = styled.div`
 const ChatSettings = styled.div`
     display: flex;
     flex-direction: column;
+`
+
+const ProfileImage = styled.div`
+    border-radius: 50%
+    width: 30px;
+    height: 30px; 
 `

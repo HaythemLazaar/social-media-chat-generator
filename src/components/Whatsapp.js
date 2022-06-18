@@ -2,16 +2,18 @@ import React from 'react'
 import styled from 'styled-components'
 
 
-function Whatsapp() {
+function Whatsapp(props) {
   return (
     <div className='whatsApp'>
-        <StatusBar />
+        <StatusBar>
+            <h2>{props.details.name}</h2>
+        </StatusBar>
         <DisplayMessage>
             <ul>
-                {messages.map((message) => (
+                {props.messages.map((message) => (
                     <li key={message.id}>
                         <div>{message.content}</div>
-                        <div>{message.createdAt}</div>
+                        <div>{message.time}</div>
                     </li>
                 ))}
             </ul>
@@ -33,7 +35,6 @@ const StatusBar = styled.div`
 const DisplayMessage = styled.div`
     display: flex;
     flex-direction: column;
-    background-color: black;
     height: 200px;
     width: 200px;
 `
