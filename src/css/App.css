@@ -5,3 +5,7 @@
   align-items: center;
   height: 100vh;
 }
+
+.messsagingConfig{
+  max-width: 800px;
+}

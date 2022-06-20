@@ -1,17 +1,18 @@
 import React from 'react'
 import styled from 'styled-components'
-
+import '../css/whatsapp.css'
 
 function Whatsapp(props) {
   return (
-    <div className='whatsApp'>
+    <div className='whatsapp'>
         <StatusBar>
             <h2>{props.details.name}</h2>
+            <h2>{props.details.status}</h2>
         </StatusBar>
         <DisplayMessage>
             <ul>
-                {props.messages.map((message) => (
-                    <li key={message.id}>
+                {props.messages.map((message, i) => (
+                    <li key={i} className={"user" + message.sendingUser}>
                         <div>{message.content}</div>
                         <div>{message.time}</div>
                     </li>

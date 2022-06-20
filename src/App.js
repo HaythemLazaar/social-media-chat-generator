@@ -1,6 +1,6 @@
 import React, { useState, useEffect} from 'react';
 import MessagingApp from './components/MessagingApp';
-import './App.css';
+import './css/App.css';
 import {
   BrowserRouter,
   Routes,
@@ -10,12 +10,31 @@ import styled from 'styled-components';
 
 
 function App() {
+  let messageBreakValue = ''
+  let message1 = {
+    content: 'Hello',
+    time: '11:30 AM',
+    sendingUser: 1
+  }
+  let message2 = {
+    content: 'Hello',
+    time: '11:30 AM',
+    sendingUser: 1
+  }
+
+  let time = new Date()
+
+
   const [messages, setMessages] = useState([
     {
-      id: 1,
       content: 'Hello',
-      time: '11:30 AM',
+      time: '11:30',
       sendingUser: 1
+    },
+    {
+      content: 'Hello',
+      time: '11:30',
+      sendingUser: 2
     }
   ]);
 
@@ -25,41 +44,55 @@ function App() {
   })
 
   const changeName = (e) => setDetails({name: e.target.value})
-  const changeStatus = e => setDetails({status: e.target.value})
+  const changeStatus = (e) => {
+    const newDetails = {...details}
+    newDetails.status = e.target.value
+    setDetails(newDetails)
+  }
+  const addMessage = (e,message) => {
+    e.preventDefault();
+    const newMessages = [...messages]
+    newMessages.push(message)
+    setMessages(newMessages)
+  }
 
   return (
     <div className="App">
-      <MessagingConfig>
+      <div className='MessagingConfig'>
         <ChatSettings>
           <h3>Name :</h3>
-          <input type='text' value={details.name} onChange={changeName}/>
+          <input type='text' value={details.name} onChange={changeName} />
           <h3>Image :</h3>
           <ProfileImage />
           <h3>Online Status :</h3>
-          <input type='text' value={details.status} onChange={changeStatus}/>
+          <input type='text' value={details.status} onChange={changeStatus} />
           <h3>Add Message Break :</h3>
-          <input type='text' placeholder='TODAY'/>
-          <button onClick>Add</button>
+          <input type='text' placeholder='TODAY' onChange={e => messageBreakValue = e.target.value}/>
+          <button >Add</button>
         </ChatSettings>
         <Chat>
           <ChatPerson>
-            <h2>Person 1 Chat :</h2>
-            <h2>Time :</h2>
-            <input type='text' />
-            <h2>Message :</h2>
-            <textarea placeholder='Enter person 1 message here' />
-            <button>Send Message</button>
+            <form>
+              <h2>Person 1 Chat :</h2>
+              <label>Time :</label><br />
+              <input type='text' placeholder={time.getHours() + ':' + time.getMinutes()} onChange={e => message1.time = e.target.value} /><br />
+              <label>Message :</label><br />
+              <textarea placeholder='Enter person 1 message here' onChange={e => message1.content = e.target.value} /><br />
+              <input type='submit' value='Send Message' onClick={(e) => addMessage(e,message1)} />
+            </form>
           </ChatPerson>
           <ChatPerson>
-            <h2>Person 2 Chat :</h2>
-            <h2>Time :</h2>
-            <input type='text' />
-            <h2>Message :</h2>
-            <textarea placeholder='Enter person 2 message here' />
-            <button>Send Message</button>
+            <form>
+              <h2>Person 2 Chat :</h2>
+              <label>Time :</label><br />
+              <input type='text' placeholder={time.getHours() + ':'+time.getMinutes()} onChange={e => message2.time = e.target.value} /><br />
+              <label>Message :</label><br />
+              <textarea placeholder='Enter person 2 message here' /><br />
+              <input type='submit' value='Send Message' onClick={(e) => addMessage(e,message2)} />
+            </form>
           </ChatPerson>
         </Chat>
-      </MessagingConfig>
+      </div>
         
       <MessagingApp messages={messages} details={details} appName={'w'}/>
     </div>
@@ -88,6 +121,7 @@ const ProfileImage = styled.div`
 `
 
 const MessagingConfig = styled.div`
+  max-width: 800px;
 `
 
 const Chat = styled.div`
