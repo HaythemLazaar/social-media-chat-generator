@@ -10,16 +10,20 @@ import styled from 'styled-components';
 
 
 function App() {
-  let messageBreakValue = ''
   let message1 = {
-    content: 'Hello',
-    time: '11:30 AM',
+    content: '',
+    time: '',
     sendingUser: 1
   }
   let message2 = {
-    content: 'Hello',
-    time: '11:30 AM',
-    sendingUser: 1
+    content: '',
+    time: '',
+    sendingUser: 2
+  }
+  let messageBreak = {
+    content: 'TODAY',
+    time: '',
+    sendingUser: 3
   }
 
   let time = new Date()
@@ -67,8 +71,8 @@ function App() {
           <h3>Online Status :</h3>
           <input type='text' value={details.status} onChange={changeStatus} />
           <h3>Add Message Break :</h3>
-          <input type='text' placeholder='TODAY' onChange={e => messageBreakValue = e.target.value}/>
-          <button >Add</button>
+          <input type='text' placeholder='TODAY' onChange={e => messageBreak.content = e.target.value}/>
+          <button onClick={e => addMessage(e,messageBreak)}>Add</button>
         </ChatSettings>
         <Chat>
           <ChatPerson>

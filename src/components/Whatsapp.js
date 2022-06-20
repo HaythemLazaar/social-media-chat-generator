@@ -12,10 +12,17 @@ function Whatsapp(props) {
         <DisplayMessage>
             <ul>
                 {props.messages.map((message, i) => (
-                    <li key={i} className={"user" + message.sendingUser}>
-                        <div>{message.content}</div>
-                        <div>{message.time}</div>
-                    </li>
+                    message.sendingUser == 3 ?
+                        <li key={i} className={"user" + message.sendingUser}>
+                            <div>{message.content} Break</div>
+                        </li> :  
+                        <li key={i} className={"user" + message.sendingUser}>
+                            <div>{message.content}</div>
+                            <div>{message.time}</div>
+                        </li>
+                    
+                       
+                    
                 ))}
             </ul>
         </DisplayMessage>
