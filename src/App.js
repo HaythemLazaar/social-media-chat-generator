@@ -135,7 +135,7 @@ const ChatSettings = styled.div`
 
 const ProfileImage = styled.div`
   border-radius: 50%;
-  max-width: 30px;
+  width: 32px;
   height: 30px; 
   background-color: grey;
 `
