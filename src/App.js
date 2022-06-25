@@ -1,5 +1,6 @@
 import React, { useState, useEffect} from 'react';
 import MessagingApp from './components/MessagingApp';
+import ProfileImage from './components/ProfileImage';
 import './css/App.css';
 import {
   BrowserRouter,
@@ -7,6 +8,7 @@ import {
   Route,
 } from 'react-router-dom'
 import styled from 'styled-components';
+import blank from './whatsapp-images/blank.png'
 
 
 function App() {
@@ -32,6 +34,11 @@ function App() {
 
   const [messages, setMessages] = useState([
     {
+      content: 'TODAY',
+      time: '00',
+      sendingUser: 3
+    },
+    {
       content: 'Hello',
       time: '11:30',
       sendingUser: 1
@@ -47,6 +54,8 @@ function App() {
     name: 'Dan',
     status: 'Online'
   })
+
+  const [selectedImage, setSelectedImage] = useState(blank)
 
   const changeName = (e) => {
     const newDetails = {...details}
@@ -78,12 +87,22 @@ function App() {
 
   return (
     <div className="App">
-      <div className='MessagingConfig'>
+      <div className='MessagingConfig'> 
         <ChatSettings>
           <h3>Name :</h3>
           <input type='text' value={details.name} onChange={changeName} />
           <h3>Image :</h3>
-          <ProfileImage />
+          <input
+            type="file"
+            name="profileImage"
+            onChange={(event) => {
+            console.log(event.target.files[0]);
+            if(event.target.files.length !== 0) {
+              setSelectedImage(URL.createObjectURL(event.target.files[0]));
+          }}}/>
+          <div className='profile-image'>
+            <ProfileImage img={selectedImage} />
+          </div>
           <h3>Online Status :</h3>
           <input type='text' value={details.status} onChange={changeStatus} />
           <h3>Add Message Break :</h3>
@@ -114,7 +133,7 @@ function App() {
         </Chat>
       </div>
         
-      <MessagingApp messages={messages} details={details} appName={'w'} Img={ProfileImage}/>
+      <MessagingApp messages={messages} details={details} appName={'w'} img={selectedImage}/>
     </div>
   );
 }
@@ -131,13 +150,6 @@ const ChatPerson = styled.div`
 const ChatSettings = styled.div`
   display: flex;
   flex-direction: column;
-`
-
-const ProfileImage = styled.div`
-  border-radius: 50%;
-  width: 32px;
-  height: 30px; 
-  background-color: grey;
 `
 
 const MessagingConfig = styled.div`

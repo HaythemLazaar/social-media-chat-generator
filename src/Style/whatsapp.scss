@@ -8,7 +8,6 @@
     ul > li{
         list-style-type: none;
         margin: 5px;
-        padding: 5px;
         box-shadow: 0px 2px 3px 0px #c2bdb7;
         border-radius: 8px;
         max-width: 75%;
@@ -19,6 +18,7 @@
     background-color: white;
     max-width: 75%;
     align-self: flex-start;
+    padding: 5px;
 }
 
 .user2{
@@ -26,12 +26,14 @@
     text-align: right;
     max-width: 75%;
     align-self: flex-end;
+    padding: 5px;
 }
 
 .user3{
-    background-color: grey;
+    background-color: #bcbdca78;
     text-align: center;
     align-self: center;
+    padding: 3px 12px;
 }
 
 .top-left{

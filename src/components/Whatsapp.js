@@ -1,18 +1,21 @@
 import React from 'react'
 import styled from 'styled-components'
 import '../css/whatsapp.css'
+import ProfileImage from './ProfileImage'
 import topLeftImage from '../whatsapp-images/whatsapp_iphone_top_left.png'
 import topRightImage from '../whatsapp-images/whatsapp_iphone_top_right.png'
 import bottomFooter from '../whatsapp-images/whatsapp_iphone_footer.png'
+import blank from '../whatsapp-images/blank.png'
 
 function Whatsapp(props) {
-    const ProfileImage = props.Img
   return (
     <div className='whatsapp'>
         <StatusBar>
             <div className='top-left'>
                 <img src={topLeftImage} />
-                <ProfileImage />
+                <div className='profile-image'>
+                    <ProfileImage img={props.img}/> 
+                </div>
                 <Profile>
                     <h5>{props.details.name}</h5>
                     <h6>{props.details.status}</h6>
@@ -52,9 +55,6 @@ const StatusBar = styled.div`
     flex-direction: row;
     justify-content: space-between;
     border-bottom: 1.5px solid #c4c4c4c7;
-    img{
-        height: 50px;
-    }
 `
 
 const MessageBar = styled.div`
@@ -67,7 +67,7 @@ const MessageBar = styled.div`
 `
 
 const Profile = styled.div`
-    margin-left: 20px;
+    margin-left: 5px;
     h5{
         font-size: 15px;
         margin: 0;
