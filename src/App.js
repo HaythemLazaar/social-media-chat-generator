@@ -15,19 +15,20 @@ function App() {
     time: '',
     sendingUser: 1
   }
+
   let message2 = {
     content: '',
     time: '',
     sendingUser: 2
   }
+
   let messageBreak = {
     content: 'TODAY',
-    time: '',
+    time: '00',
     sendingUser: 3
   }
 
   let time = new Date()
-
 
   const [messages, setMessages] = useState([
     {
@@ -47,18 +48,33 @@ function App() {
     status: 'Online'
   })
 
-  const changeName = (e) => setDetails({name: e.target.value})
+  const changeName = (e) => {
+    const newDetails = {...details}
+    newDetails.name = e.target.value
+    setDetails(newDetails)
+  }
+  
   const changeStatus = (e) => {
     const newDetails = {...details}
     newDetails.status = e.target.value
     setDetails(newDetails)
   }
+
   const addMessage = (e,message) => {
     e.preventDefault();
-    const newMessages = [...messages]
-    newMessages.push(message)
-    setMessages(newMessages)
+    if(message.content != "" && message.time != ""){
+      const newMessages = [...messages]
+      newMessages.push(message)
+      setMessages(newMessages)
+      e.target.reset()
+    }
   }
+
+  useEffect( () => {
+    console.log('Updated Messages !')
+  }
+  ,[messages])
+
 
   return (
     <div className="App">
@@ -76,29 +92,29 @@ function App() {
         </ChatSettings>
         <Chat>
           <ChatPerson>
-            <form>
+            <form onSubmit={e => addMessage(e,message1)}>
               <h2>Person 1 Chat :</h2>
               <label>Time :</label><br />
               <input type='text' placeholder={time.getHours() + ':' + time.getMinutes()} onChange={e => message1.time = e.target.value} /><br />
               <label>Message :</label><br />
               <textarea placeholder='Enter person 1 message here' onChange={e => message1.content = e.target.value} /><br />
-              <input type='submit' value='Send Message' onClick={(e) => addMessage(e,message1)} />
+              <input type='submit' value='Send Message' />
             </form>
           </ChatPerson>
           <ChatPerson>
-            <form>
+            <form onSubmit={e => addMessage(e,message2)}>
               <h2>Person 2 Chat :</h2>
               <label>Time :</label><br />
               <input type='text' placeholder={time.getHours() + ':'+time.getMinutes()} onChange={e => message2.time = e.target.value} /><br />
               <label>Message :</label><br />
-              <textarea placeholder='Enter person 2 message here' /><br />
-              <input type='submit' value='Send Message' onClick={(e) => addMessage(e,message2)} />
+              <textarea placeholder='Enter person 2 message here' onChange={e => message2.content = e.target.value} /><br />
+              <input type='submit' value='Send Message' />
             </form>
           </ChatPerson>
         </Chat>
       </div>
         
-      <MessagingApp messages={messages} details={details} appName={'w'}/>
+      <MessagingApp messages={messages} details={details} appName={'w'} Img={ProfileImage}/>
     </div>
   );
 }
@@ -121,7 +137,7 @@ const ProfileImage = styled.div`
   border-radius: 50%;
   max-width: 30px;
   height: 30px; 
-  background-color: green;
+  background-color: grey;
 `
 
 const MessagingConfig = styled.div`
