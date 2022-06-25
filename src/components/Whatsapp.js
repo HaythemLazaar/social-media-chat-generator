@@ -5,7 +5,9 @@ import ProfileImage from './ProfileImage'
 import topLeftImage from '../whatsapp-images/whatsapp_iphone_top_left.png'
 import topRightImage from '../whatsapp-images/whatsapp_iphone_top_right.png'
 import bottomFooter from '../whatsapp-images/whatsapp_iphone_footer.png'
-import blank from '../whatsapp-images/blank.png'
+import seen from '../whatsapp-images/whatsapp_chat_msg_seen.png'
+import unseen from '../whatsapp-images/whatsapp_chat_msg_unseen.png'
+
 
 function Whatsapp(props) {
   return (
@@ -25,16 +27,45 @@ function Whatsapp(props) {
         </StatusBar>
         <div className='messages-display'>
             <ul>
-                {props.messages.map((message, i) => (
-                    message.sendingUser == 3 ?
-                        <li key={i} className={"user" + message.sendingUser}>
-                            <div>{message.content}</div>
-                        </li> :  
-                        <li key={i} className={"user" + message.sendingUser}>
-                            <div>{message.content}</div>
-                            <div>{message.time}</div>
-                        </li>
-                ))}
+                {props.messages.map((message, i) => {
+                    if(message.sendingUser == 3){
+                        return(
+                            <li key={i} className={"user" + message.sendingUser}>
+                                <div>{message.content}</div>
+                            </li>
+                        )
+                    }
+                    else if(message.sendingUser == 1){
+                        return(
+                            <li key={i} className={"user" + message.sendingUser}>
+                                <div className='message-content'>{message.content}</div>
+                                <div className='message-time'>{message.time}</div>
+                            </li>
+                        )
+                    }
+                    else if(message.sendingUser == 2){
+                        if(message.status == 'seen'){
+                            return(
+                                <li key={i} className={"user" + message.sendingUser}>
+                                    <div className='message-content'>{message.content}</div>
+                                    <div className='message-time'>{message.time}</div>
+                                    <div className='message-status'><img src={seen} /></div>
+                                </li>
+                            )
+                        }
+                        else{
+                            return(
+                                <li key={i} className={"user" + message.sendingUser}>
+                                    <div className='message-content'>{message.content}</div>
+                                    <div className='message-time'>{message.time}</div>
+                                    <div className='message-status'><img src={unseen} /></div>
+                                </li>
+                            )
+                        }
+                        
+                    }  
+                    
+                })}
             </ul>
         </div>
         <MessageBar>

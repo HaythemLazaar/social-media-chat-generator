@@ -27,6 +27,16 @@
     max-width: 75%;
     align-self: flex-end;
     padding: 5px;
+    .message-status{
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding-left: 2px;
+        img{
+            width: 15px;
+            height: auto;
+        }
+    }
 }
 
 .user3{
@@ -50,4 +60,22 @@
     background-image: url("../whatsapp-images/wh-back.png");
     background-size: cover;
     background-position: center;
+}
+
+.user1, .user2{
+    display: flex;
+    flex-direction: row;
+    .message-content{
+        font-size: 14px;
+    }
+    .message-time{
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        color: rgba(0,0,0,.45);
+        font-size: 11px;
+        letter-spacing: 0.6px;
+        padding-left: 12px;
+        
+    }
 }

@@ -21,7 +21,8 @@ function App() {
   let message2 = {
     content: '',
     time: '',
-    sendingUser: 2
+    sendingUser: 2,
+    status: 'seen'
   }
 
   let messageBreak = {
@@ -46,7 +47,8 @@ function App() {
     {
       content: 'Hello',
       time: '11:30',
-      sendingUser: 2
+      sendingUser: 2,
+      status: 'seen'
     }
   ]);
 
