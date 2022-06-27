@@ -14,7 +14,7 @@ function Whatsapp(props) {
     <div className='whatsapp'>
         <StatusBar>
             <div className='top-left'>
-                <img src={topLeftImage} />
+                <img src={topLeftImage} className='status-img'/>
                 <div className='profile-image'>
                     <ProfileImage img={props.img}/> 
                 </div>
@@ -23,7 +23,7 @@ function Whatsapp(props) {
                     <h6>{props.details.status}</h6>
                 </Profile>
             </div>
-            <img src={topRightImage} />
+            <img src={topRightImage} className='status-img'/>
         </StatusBar>
         <div className='messages-display'>
             <ul>
@@ -86,11 +86,13 @@ const StatusBar = styled.div`
     flex-direction: row;
     justify-content: space-between;
     border-bottom: 1.5px solid #c4c4c4c7;
+    .status-img{
+        height: 50px;
+    }
 `
 
 const MessageBar = styled.div`
     width: 425px;
-    height: 20px;
     border-top: grey;
     img{
         max-width: 425px;
