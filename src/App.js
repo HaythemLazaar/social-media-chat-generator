@@ -36,17 +36,16 @@ function App() {
   const [messages, setMessages] = useState([
     {
       content: 'TODAY',
-      time: '00',
       sendingUser: 3
     },
     {
       content: 'Hello',
-      time: '11:30',
+      time: '11:30 AM',
       sendingUser: 1
     },
     {
       content: 'Hello',
-      time: '11:30',
+      time: '11:31 AM',
       sendingUser: 2,
       status: 'seen'
     }
@@ -104,74 +103,88 @@ function App() {
 
   const getImage = () => takeScreenshot(ref.current).then(download)
 
+  const resetMessages = () => {
+    const newMessages = []
+    setMessages(newMessages)
+  }
+
   return (
     <div className="App">
       <div className='messagingConfig'> 
-        <ChatSettings>
-          <h2>Chat Settings :</h2>
-          <label>Name :</label>
-          <input type='text' value={details.name} onChange={changeName} />
-          <label>Image :</label>
-          <div className='profile-image'>
-            <ProfileImage img={selectedImage} />
+        <div className='preview'>
+          <div className='container'>
+            <div className='profile-details'>
+              <h2>Chat Settings :</h2>
+              <label>Name :</label>
+              <input type='text' value={details.name} onChange={changeName} />
+              <label>Image :</label>
+              <div className='img-container'>
+                <div className='profile-image'>
+                  <ProfileImage img={selectedImage} />
+                </div>
+                <input type="file" name="profileImage" onChange={(event) => {
+                  if(event.target.files.length !== 0) {
+                    setSelectedImage(URL.createObjectURL(event.target.files[0]));
+                }}}/>
+              </div>
+              <label>Online Status :</label>
+              <input type='text' value={details.status} onChange={changeStatus} />
+            </div>
           </div>
-          <input type="file" name="profileImage" onChange={(event) => {
-            if(event.target.files.length !== 0) {
-              setSelectedImage(URL.createObjectURL(event.target.files[0]));
-          }}}/>
-          <label>Online Status :</label>
-          <input type='text' value={details.status} onChange={changeStatus} />
-          <label>Add Message Break :</label>
-          <input type='text' placeholder='TODAY' onChange={e => messageBreak.content = e.target.value}/>
-          <button onClick={e => addMessage(e,messageBreak)}>Add</button>
-        </ChatSettings>
-        <Chat>
-          <ChatPerson>
+        </div >
+        <div className='chat'>
+          <div className='chat-person'>
             <form onSubmit={e => addMessage(e,message1)}>
               <h2>Person 1 Chat :</h2>
-              <label>Time :</label><br />
-              <input type='text' placeholder={time.getHours() + ':' + time.getMinutes()} onChange={e => message1.time = e.target.value} /><br />
-              <label>Message :</label><br />
-              <textarea placeholder='Enter person 1 message here' onChange={e => message1.content = e.target.value} /><br />
-              <input type='submit' value='Send Message' />
+              <label>Time :</label>
+              <input type='text' placeholder={time.getHours() + ':' + time.getMinutes()} onChange={e => message1.time = e.target.value} />
+              <label>Message :</label>
+              <textarea placeholder='Enter person 1 message here' onChange={e => message1.content = e.target.value} />
+              <input type='submit' value='Send Message'/>
             </form>
-          </ChatPerson>
-          <ChatPerson>
+          </div>
+          <div className='chat-person'>
             <form onSubmit={e => addMessage(e,message2)}>
               <h2>Person 2 Chat :</h2>
-              <label>Message Status :</label><br />
-              <input type="radio" id="unseen" name="status" value="unseen" onChange={e => setLastMessageStatus(e.target.value)} checked={lastMessageStatus == 'unseen'} /> <label for="unseen">Delivered</label>
-              <input type="radio" id="seen" name="status" value="seen" onChange={e => setLastMessageStatus(e.target.value)} checked={lastMessageStatus == 'seen'} /> <label for="seen">Seen</label><br/>
-              <label>Time :</label><br />
-              <input type='text' placeholder={time.getHours() + ':'+time.getMinutes()} onChange={e => message2.time = e.target.value} /><br />
-              <label>Message :</label><br />
-              <textarea placeholder='Enter person 2 message here' onChange={e => message2.content = e.target.value} /><br />
+              <label>Message Status :</label>
+              <div>
+                <input type="radio" id="unseen" name="status" value="unseen" onChange={e => setLastMessageStatus(e.target.value)} checked={lastMessageStatus == 'unseen'} /> <label style={{fontWeight: 300}} for="unseen">Delivered</label>
+                <input type="radio" id="seen" name="status" value="seen" onChange={e => setLastMessageStatus(e.target.value)} checked={lastMessageStatus == 'seen'} /> <label style={{fontWeight: 300}} for="seen">Seen</label>
+              </div>
+              <label>Time :</label>
+              <input type='text' placeholder={time.getHours() + ':'+time.getMinutes()} onChange={e => message2.time = e.target.value} />
+              <label>Message :</label>
+              <textarea placeholder='Enter person 2 message here' onChange={e => message2.content = e.target.value} />
               <input type='submit' value='Send Message' />
             </form>
-          </ChatPerson>
-        </Chat>
-      </div>
-      <div className='preview'>
-        <div ref={ref}>
-          <MessagingApp messages={messages} details={details} appName={'w'} img={selectedImage}/>
+          </div>
         </div>
-        <button className='screenshot-button' onClick={getImage}>Take Screenshot</button>
       </div>
+      <div className='right'>
+        <div className='preview'>
+          <div className='container'>
+            <div className='msg-brk'>
+              <h2>Add Message Break :</h2>
+              <label>Content :</label>
+              <input type='text' placeholder='TODAY' onChange={e => messageBreak.content = e.target.value}/>
+              <button onClick={e => addMessage(e,messageBreak)}>Add Message Break</button>
+            </div>
+          </div>
+        </div>
+        <div className='preview'>
+          <div ref={ref}>
+            <MessagingApp messages={messages} details={details} appName={'w'} img={selectedImage}/>
+          </div>
+          <button className='reset-btn' onClick={resetMessages}>Reset</button>
+          <button className='screenshot-button' onClick={getImage}>Take Screenshot</button>
+        </div>
+      </div>
+      
     </div>
   );
 }
 
 export default App;
-
-
-const ChatPerson = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin: 20px;
-  background-color: #FFE7D6;
-  padding: 10px;
-  border-radius: 12px;
-`
 
 const ChatSettings = styled.div`
   display: flex;
@@ -180,9 +193,4 @@ const ChatSettings = styled.div`
 
 const MessagingConfig = styled.div`
   max-width: 800px;
-`
-
-const Chat = styled.div`
-  display: flex;
-  flex-direction: row;
 `

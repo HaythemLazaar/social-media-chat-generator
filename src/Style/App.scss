@@ -12,15 +12,33 @@ $color-5: #BEE3DB;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  height: 100vh;
   background-color: $color-4;
 }
 
 .messagingConfig{
-  max-width: 800px;
-  margin: 50px;
-  color: $color-2;
-  font-family: $primary-font;
+    width: 550px;
+    margin: 20px;
+    color: $color-2;
+    font-family: $primary-font;
+    .container{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding-bottom: 10px;
+        .profile-details{
+            display: flex;
+            flex-direction: column;
+            .img-container{
+                display: flex;
+                flex-direction: row;
+                justify-content: space-evenly;
+                input{
+                    width: 90px;
+                }
+            }
+        }
+    }
 }
 
 .profile-image{
@@ -43,7 +61,7 @@ button, input[type=submit]{
     font-family: $desc-font;
     font-size: 18px;
     padding: 10px;
-    margin: 10px;
+    margin: 10px 0;
     cursor: pointer;
     max-width: 250px;
 }
@@ -51,6 +69,7 @@ button, input[type=submit]{
 button:hover, input[type=submit]:hover{
     background-color: #FAF9F9;
     color: #000505;
+    border: 1px solid $color-2;
 }
 
 h2{
@@ -78,4 +97,78 @@ input[type=text]{
     background-color: $color-1;
     padding: 10px;
     border-radius: 12px;
+    margin: 20px 0;
 }
+
+
+.chat{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.chat-person{
+    display: flex;
+    flex-direction: column;
+    background-color: #FFE7D6;
+    padding: 10px;
+    border-radius: 12px;
+    width: 250px;
+    align-items: center;
+    form{
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        label{
+            display: inline-block;
+            font-size: 18px;
+            margin: 10px 0;
+            font-weight: 500;
+        }
+        textarea{
+            background-color: $color-4;
+            border: 1px solid $color-2;
+            border-radius: 6px;
+            max-width: 350px;
+            height: 140px;
+            color: $color-2;
+            padding: 4px;
+            margin: 2px;
+        }
+    }
+}
+
+
+.right{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 100vh;
+    margin: 20px;
+    .container{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        .msg-brk{
+            label{
+                font-family: $primary-font;
+                display: inline-block;
+                font-size: 18px;
+                margin: 10px 0;
+                font-weight: 500;
+            }
+            display: flex;
+            flex-direction: column;
+        }
+    }
+}
+
+.reset-btn{
+    color: $color-2;
+    width: 100px;
+    margin-right: 20px;
+    background-color: $color-4;
+    border: 1px solid $color-2;
+}
+
