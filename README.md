@@ -1,36 +1,24 @@
-# social-media-chat-generator
-Tool to create social media chat screenshots.\
-This project was created with React, Styled-components, Use-react-screenshot.
+# Social Media Chat Generator
+This is a tool to create fake whatsApp chats. 
+<br>
+<br>
+<img src="https://github.com/HaythemLazaar/toCopy/blob/main/public/toolCap.gif" alt="tool use" />
 
-## Available Scripts
 
-In the project directory, you can run:
 
-### `npm start`
+## Project Inspiration & Backstory
+This is a hobby project of mine, the idea behind was when I was learning how marketers create social proof for their products. One way was to display conversations about the proudct, so I hopped onto it.
 
-Runs the app in the development mode.\
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
+## Tech Stack
+The app is solely on the front:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- React
+- styled-components
+- use-react-screenshot
+- html2canvas
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Deployed on Vercel
+Check out the live version : [toCopy](https://to-copy.vercel.app/)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
